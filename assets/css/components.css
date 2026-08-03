@@ -325,7 +325,8 @@ body.mobile-nav-open { overflow: hidden; }
 
 .hero:not(.hero--home) { align-items: flex-end; }
 
-.hero__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero__image,
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; }
 
 /* Overlay — background-token tint + bottom-to-top gradient for text contrast (spec §5 Hero D-024). */
 .hero__overlay {
