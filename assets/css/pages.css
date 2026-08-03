@@ -1,0 +1,10 @@
+/*
+  Page-specific rules only — anything reusable belongs in components.css.
+  Kept intentionally thin per docs/03-execution/05-PROTOTYPE-V1-DECISIONS.md §12.
+*/
+
+/* Home — testimonial section sits on a tighter rhythm between two full sections. */
+[data-page="home"] #perspective { padding-block: var(--space-4xl); }
+
+/* Project Details — metadata block needs extra clearance from the gallery above it. */
+[data-page="project-detail"] .metadata { margin-top: var(--space-2xl); }

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marina Residence — Adelier</title>
+<meta name="description" content="A serene waterfront residence balancing warmth and precision.">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="project-detail">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header" data-header>
+  <div class="site-header__inner container">
+    <a class="site-header__logo-link" href="../index.html" aria-label="Adelier — Home">
+      <img class="logo-mark" src="../assets/logo/adelier-logo.png" alt="Adelier" width="251" height="67">
+    </a>
+    <nav class="site-header__nav" aria-label="Primary">
+      <a class="site-header__nav-link" href="../index.html">Home</a>
+      <a class="site-header__nav-link" href="projects.html" aria-current="page">Projects</a>
+      <a class="site-header__nav-link" href="our-story.html">Our Story</a>
+      <a class="site-header__nav-link" href="careers.html">Careers</a>
+    </nav>
+    <div class="site-header__actions">
+      <a class="button site-header__cta" href="https://wa.me/97140000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M9.8 8.8c.2-.5.5-.5.8-.5h.7c.2 0 .5.1.7.5l1 2.4c.2.4.1.7-.1.9l-.5.5c-.2.2-.3.5-.1.8.6 1 1.4 1.8 2.4 2.4.3.2.6.1.8-.1l.5-.5c.2-.2.5-.3.9-.1l2.4 1c.4.2.5.5.5.7v.7c0 .3 0 .6-.5.8-.8.4-2.5.6-5.1-2-2.6-2.4-4.3-2-5.1z"/></svg>
+        <span>Let's Chat</span>
+      </a>
+      <button class="site-header__menu-trigger" type="button" data-menu-trigger aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav" data-mobile-nav aria-hidden="true" inert>
+  <div class="mobile-nav__top container">
+    <img class="logo-mark logo-mark--sm" src="../assets/logo/adelier-logo.png" alt="Adelier" width="251" height="67">
+    <button class="mobile-nav__close" type="button" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav__list container" aria-label="Primary">
+    <a class="mobile-nav__link" href="../index.html">Home</a>
+    <a class="mobile-nav__link" href="projects.html" aria-current="page">Projects</a>
+    <a class="mobile-nav__link" href="our-story.html">Our Story</a>
+    <a class="mobile-nav__link" href="careers.html">Careers</a>
+    <a class="mobile-nav__link" href="contact.html">Let's Chat</a>
+  </nav>
+  <div class="mobile-nav__footer container">
+    <a class="button button--primary" href="contact.html">Let's Chat</a>
+    <div class="mobile-nav__social">
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 20c.7-2.4 2-7.6 2-7.6M12 12a2.5 2.5 0 1 0 0-5 2.7 2.7 0 0 0-2.7 3.3c.1.5.3.9.3.9"/></svg></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7.2" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 16.5v-3.5a2 2 0 0 1 4 0v3.5"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <section class="hero" id="project-overview" aria-label="Project overview">
+    <img class="hero__image" src="../assets/images/detail-hero.jpg" alt="Marina Residence — living room overlooking the water" width="5460" height="3072">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <span class="eyebrow">Residential · Dubai, UAE</span>
+      <h1>Marina Residence</h1>
+      <p class="hero__subtitle">A serene waterfront residence balancing warmth and precision.</p>
+    </div>
+  </section>
+
+  <section class="editorial-slider" id="project-showcase" aria-label="Visual showcase" data-editorial-slider>
+    <div class="editorial-slider__track" data-slider-track>
+      <div class="editorial-slider__slide is-active" data-slider-slide data-title="Waterfront Living" data-desc="Framed views across Dubai Marina with natural limestone and warm timber.">
+        <img src="../assets/images/project-marina-residence.jpg" loading="lazy" alt="Marina Residence main living room" width="2000" height="2400">
+      </div>
+      <div class="editorial-slider__slide" data-slider-slide data-title="Material Palette" data-desc="Travertine, brushed brass, and soft natural textiles in balanced dialogue.">
+        <img src="../assets/images/detail-gallery-2.jpg" loading="lazy" alt="Marina Residence material details" width="3500" height="1969">
+      </div>
+      <div class="editorial-slider__slide" data-slider-slide data-title="Dining Pavilion" data-desc="An intimate gathering space designed for quiet precision and evening light.">
+        <img src="../assets/images/detail-gallery-3.jpg" loading="lazy" alt="Marina Residence dining area" width="3800" height="3168">
+      </div>
+      <div class="editorial-slider__slide" data-slider-slide data-title="Architectural Details" data-desc="Custom millwork and concealed lighting joineries crafted to millimeter accuracy.">
+        <img src="../assets/images/detail-gallery-4.jpg" loading="lazy" alt="Marina Residence interior detail" width="5460" height="3072">
+      </div>
+      <div class="editorial-slider__slide" data-slider-slide data-title="Evening Atmosphere" data-desc="Serene waterfront textures glowing as twilight settles over the harbor.">
+        <img src="../assets/images/project-loft-42.jpg" loading="lazy" alt="Marina Residence evening light" width="2000" height="2088">
+      </div>
+    </div>
+    <div class="editorial-slider__caption">
+      <div class="editorial-slider__title" data-slider-title>Waterfront Living</div>
+      <div class="editorial-slider__desc" data-slider-desc>Framed views across Dubai Marina with natural limestone and warm timber.</div>
+    </div>
+  </section>
+
+  <section class="section" id="project-information">
+    <div class="project-info-grid">
+      <div class="project-info-grid__media">
+        <img src="../assets/images/studio-gallery-3.jpg" loading="lazy" alt="Marina Residence architectural stone detail" width="3800" height="3168">
+      </div>
+      <div class="project-info-grid__content">
+        <span class="eyebrow">Project information</span>
+        <p class="intro-copy">Every material and sightline is considered against the water beyond, creating a home that feels quiet, tactile, and precise.</p>
+        <dl class="metadata">
+          <div><dt>Category</dt><dd>Residential</dd></div>
+          <div><dt>Location</dt><dd>Dubai, UAE</dd></div>
+          <div><dt>Year</dt><dd>2025</dd></div>
+          <div><dt>Services</dt><dd>Interior Design, FF&amp;E</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="project-gallery">
+    <div class="editorial-grid editorial-grid--tight">
+      <!-- Row 1: Large statement image (span 7) + vertical detail (span 5, offset) -->
+      <div class="editorial-row">
+        <div class="span-7">
+          <img src="../assets/images/detail-gallery-1.jpg" loading="lazy" alt="Marina Residence living space" width="3000" height="1688" style="width:100%; display:block;">
+        </div>
+        <div class="span-5 project-card is-offset" style="aspect-ratio:auto;">
+          <img src="../assets/images/studio-gallery-2.jpg" loading="lazy" alt="Marina Residence textural stone detail" width="3323" height="2215" style="width:100%; display:block;">
+        </div>
+      </div>
+      <!-- Row 2: Full-bleed panoramic statement -->
+      <div class="editorial-row">
+        <div class="span-12" style="grid-column: span 12;">
+          <img src="../assets/images/home-about.jpg" loading="lazy" alt="Marina Residence waterfront terrace view" width="3800" height="1800" style="width:100%; display:block; aspect-ratio: 21/9; object-fit: cover;">
+        </div>
+      </div>
+      <!-- Row 3: Staggered pair (span 5 + span 7 offset) -->
+      <div class="editorial-row">
+        <div class="span-5">
+          <img src="../assets/images/studio-gallery-1.jpg" loading="lazy" alt="Marina Residence custom lighting joinery" width="3438" height="2292" style="width:100%; display:block;">
+        </div>
+        <div class="span-7 project-card is-offset" style="aspect-ratio:auto;">
+          <img src="../assets/images/studio-gallery-6.jpg" loading="lazy" alt="Marina Residence master suite sanctuary" width="3800" height="2533" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="related-projects">
+    <div class="section__heading">
+      <h2>Related Projects</h2>
+    </div>
+    <div class="project-grid">
+      <a class="project-card" href="project-detail.html">
+        <img src="../assets/images/project-quarry-house.jpg" loading="lazy" alt="Quarry House interior" width="2000" height="2400">
+        <span class="project-card__content"><span class="project-card__title">Quarry House</span></span>
+      </a>
+      <a class="project-card" href="project-detail.html">
+        <img src="../assets/images/project-skyline-suite.jpg" loading="lazy" alt="Skyline Suite interior" width="3300" height="1857">
+        <span class="project-card__content"><span class="project-card__title">Skyline Suite</span></span>
+      </a>
+      <a class="project-card" href="project-detail.html">
+        <img src="../assets/images/project-garden-pavilion.jpg" loading="lazy" alt="Garden Pavilion interior" width="2000" height="2400">
+        <span class="project-card__content"><span class="project-card__title">Garden Pavilion</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section section--brand cta" id="project-contact">
+    <h2>Interested in a similar project?</h2>
+    <div class="cta__actions">
+      <a class="button button--on-brand" href="contact.html">Contact Us</a>
+      <a class="button button--on-brand" href="contact.html">WhatsApp</a>
+    </div>
+  </section>
+
+</main>
+
+<div class="social-rail" aria-label="Social links">
+  <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+  <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 20c.7-2.4 2-7.6 2-7.6M12 12a2.5 2.5 0 1 0 0-5 2.7 2.7 0 0 0-2.7 3.3c.1.5.3.9.3.9"/></svg></a>
+  <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7.2" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 16.5v-3.5a2 2 0 0 1 4 0v3.5"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg></a>
+</div>
+
+<nav class="section-nav" aria-label="On this page" data-section-nav>
+  <ul>
+    <li><a href="#project-overview" aria-current="location">Overview</a></li>
+    <li><a href="#project-showcase">Showcase</a></li>
+    <li><a href="#project-information">Information</a></li>
+    <li><a href="#project-gallery">Gallery</a></li>
+    <li><a href="#related-projects">Related</a></li>
+    <li><a href="#project-contact">Enquire</a></li>
+  </ul>
+</nav>
+
+<button class="back-to-top" type="button" data-back-to-top aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg>
+</button>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <img class="logo-mark" src="../assets/logo/adelier-logo.png" alt="Adelier" width="251" height="67">
+        <p class="site-footer__statement">Beautiful, innovative, functional, and practical interiors.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2>Navigate</h2>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="project-detail.html">Project Detail</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:studio@adelier.com">studio@adelier.com</a></li>
+          <li><a href="tel:+97140000000">+971 4 000 0000</a></li>
+          <li>Dubai Design District, UAE</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Follow</h2>
+        <ul class="site-footer__social">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a></li>
+          <li><a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 20c.7-2.4 2-7.6 2-7.6M12 12a2.5 2.5 0 1 0 0-5 2.7 2.7 0 0 0-2.7 3.3c.1.5.3.9.3.9"/></svg></a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7.2" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 16.5v-3.5a2 2 0 0 1 4 0v3.5"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <span>© Adelier. All Rights Reserved.</span>
+      <nav aria-label="Legal">
+        <a href="#" aria-disabled="true">Privacy Policy</a>
+        <a href="#" aria-disabled="true">Terms &amp; Conditions</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

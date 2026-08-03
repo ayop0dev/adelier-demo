@@ -1,0 +1,133 @@
+/*
+  Layout primitives — grid/container/section rhythm, spec §4.6 (spacing),
+  §4.7 (grid: 12/8/4 columns, 1440 max width, centered), and the responsive
+  section-gap scale (desktop 160 / tablet 120 / mobile 80).
+*/
+
+/* Ensure zero horizontal scroll across all pages */
+html,
+body,
+main,
+.section,
+.site-footer,
+.site-header {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, picture, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(100% - (var(--content-margin) * 2), var(--content-max));
+  margin-inline: auto;
+}
+
+.reading-width {
+  width: min(100% - (var(--content-margin) * 2), var(--reading-max));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-gap-desktop);
+  padding-inline: var(--content-margin);
+}
+
+.section + .section {
+  padding-block-start: var(--space-3xl);
+}
+
+.section--tight {
+  padding-block: 80px;
+}
+.section--brand { background: var(--color-primary-brand); color: var(--color-background); }
+.section--brand h2 { color: var(--color-background); }
+
+.section__heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+.section__heading p { max-width: 32rem; color: var(--color-primary-text); }
+
+.eyebrow {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: var(--text-caption-size);
+  letter-spacing: var(--text-caption-ls);
+  font-weight: var(--text-caption-weight);
+  text-transform: uppercase;
+  color: var(--color-primary-text);
+}
+
+.intro-copy {
+  margin-top: var(--space-lg);
+  font-size: var(--text-body-lg-size);
+  line-height: var(--text-body-lg-lh);
+}
+
+.grid { display: grid; gap: var(--space-2xl); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.rule { border: none; border-top: 1px solid var(--color-border-divider); margin: 0; }
+
+.gap-top-lg { margin-top: var(--space-lg); }
+.gap-top-4xl { margin-top: var(--space-4xl); }
+
+/* Breadcrumbs — spec §5 required component, D-064: "/" separator, max 4 levels,
+   current page non-clickable, left-aligned, disabled on Homepage. */
+.breadcrumbs {
+  padding: var(--space-md) var(--content-margin) 0;
+}
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  max-width: var(--content-max);
+  margin-inline: auto;
+  font-size: var(--text-caption-size);
+  letter-spacing: var(--text-caption-ls);
+  color: var(--color-primary-text);
+}
+.breadcrumbs a { color: var(--color-primary-text); transition: color var(--duration-fast) var(--ease-standard); }
+.breadcrumbs a:hover { color: var(--color-secondary-brand); }
+.breadcrumbs li[aria-current="page"] { color: var(--color-primary-text-active); }
+.breadcrumbs li:not(:last-child)::after {
+  content: "/";
+  margin-left: var(--space-xs);
+  color: var(--color-border-strong);
+}
+
+@media (max-width: 1279px) {
+  .section { padding-block: var(--section-gap-tablet); }
+  .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+    overflow-x: clip !important;
+  }
+  .container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .section {
+    padding: var(--section-gap-mobile) var(--content-margin);
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .section--tight { padding-block: var(--space-4xl); }
+  .section__heading { display: block; margin-bottom: var(--space-lg); }
+  .section__heading .button { margin-top: var(--space-md); }
+  .grid--3, .grid--4 { grid-template-columns: 1fr; }
+  .grid { gap: var(--space-md); }
+}

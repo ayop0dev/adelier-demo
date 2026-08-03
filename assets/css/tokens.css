@@ -1,0 +1,176 @@
+/*
+  Design tokens — literal values from the repository's approved Design System
+  (docs/01-product/02-PRODUCT-SPECIFICATION.md §4, mirrored in /tokens/*.css).
+  Copied in (not @imported from outside /prototype) so this folder stays
+  self-contained and uploadable directly to a subdomain — see
+  docs/03-execution/05-PROTOTYPE-V1-DECISIONS.md §11.
+  Do not add a value here without a spec citation.
+*/
+
+:root {
+  /* Color — spec §4.2 */
+  --color-background: #FDFBF7;
+  --color-primary-brand: #B4AB97;
+  --color-primary-brand-hover: #A69C87;
+  --color-primary-brand-active: #948A76;
+  --color-primary-brand-disabled: #DAD5C9;
+  --color-secondary-brand: #878256;
+  --color-secondary-brand-hover: #766F49;
+  --color-secondary-brand-active: #655F3D;
+  --color-secondary-brand-disabled: #C7C2AC;
+  --color-primary-text: #808184;
+  --color-primary-text-hover: #6B6C6F;
+  --color-primary-text-active: #565759;
+  --color-primary-text-disabled: #BABBBD;
+
+  --color-border-default: #D8D2C8;
+  --color-border-strong: #BEB5A7;
+  --color-border-divider: #ECE8E1;
+
+  --color-success: #4F6B4A;
+  --color-warning: #B88A3B;
+  --color-error: #A64B43;
+  --color-information: #6B7D8A;
+
+  --overlay-hero: rgba(253, 251, 247, 0.24);
+  --overlay-modal-backdrop: rgba(0, 0, 0, 0.6);
+  --overlay-lightbox: rgba(0, 0, 0, 0.96);
+
+  /* Typography — spec §4.3. Real font files loaded in base.css. */
+  --font-page-title: "Alokary Personal Use", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Nexa", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --text-display-size: clamp(2.75rem, 2rem + 3vw, 4rem);
+  --text-display-lh: 1.125;
+  --text-display-ls: 0.5px;
+
+  --text-h1-size: clamp(2.25rem, 1.7rem + 2vw, 3rem);
+  --text-h1-lh: 1.1667;
+  --text-h1-ls: 0.25px;
+
+  --text-h2-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  --text-h2-lh: 1.2222;
+  --text-h2-ls: 0px;
+
+  --text-h3-size: 1.75rem;
+  --text-h3-lh: 1.2857;
+  --text-h3-weight: 500;
+
+  --text-h4-size: 1.375rem;
+  --text-h4-lh: 1.3636;
+  --text-h4-weight: 500;
+
+  --text-body-lg-size: 1.125rem;
+  --text-body-lg-lh: 1.6667;
+
+  --text-body-size: 1rem;
+  --text-body-lh: 1.625;
+
+  --text-body-sm-size: 0.875rem;
+  --text-body-sm-lh: 1.5714;
+
+  --text-caption-size: 0.75rem;
+  --text-caption-lh: 1.5;
+  --text-caption-ls: 0.5px;
+  --text-caption-weight: 500;
+
+  --text-nav-link-size: 0.875rem;
+  --text-nav-link-lh: 1.4286;
+  --text-nav-link-ls: 0.5px;
+  --text-nav-link-weight: 500;
+
+  --text-button-size: 0.875rem;
+  --text-button-lh: 1.4286;
+  --text-button-ls: 1px;
+  --text-button-weight: 500;
+
+  --text-form-label-size: 0.875rem;
+  --text-form-label-weight: 500;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --reading-width-default: 65ch;
+  --reading-width-longform: 72ch;
+  --reading-width-max: 70ch;
+
+  /* Spacing — spec §4.6, 8px base */
+  --space-none: 0px;
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 40px;
+  --space-2xl: 48px;
+  --space-3xl: 56px;
+  --space-4xl: 64px;
+
+  --section-gap-desktop: 160px;
+  --section-gap-tablet: 120px;
+  --section-gap-mobile: 80px;
+
+  /* Grid — spec §4.7 */
+  --grid-gutter: 16px;
+  --grid-margin: 24px;
+  --grid-max-width: 1440px;
+
+  /* Breakpoints — spec §4.8 (referenced by media queries) */
+  --bp-mobile: 375px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1280px;
+
+  /* Radius — spec §4.9 */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* Shadow — spec §4.10 */
+  --shadow-none: none;
+  --shadow-subtle: 0 1px 2px rgba(128, 129, 132, 0.08);
+  --shadow-low: 0 4px 12px rgba(128, 129, 132, 0.10);
+  --shadow-medium: 0 8px 24px rgba(128, 129, 132, 0.12);
+  --shadow-high: 0 16px 40px rgba(128, 129, 132, 0.14);
+
+  /* Motion — spec §4.11 */
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 600ms;
+  --ease-standard: ease-in-out;
+  --ease-entrance: ease-out;
+  --ease-exit: ease-in;
+
+  /*
+    Derived, Prototype-V1-authorized tokens only — each cites the decision
+    that authorizes it (docs/03-execution/05-PROTOTYPE-V1-DECISIONS.md).
+  */
+
+  /* Curved-button radius — derived from --radius-sm per V1 Decisions §"Curved Button Radius":
+     more curved than radius-sm, restrained (not a pill). radius-sm(2px) * 4 = 8px, equal to the
+     existing radius-lg step — reuses a value already in the closed radius system rather than
+     inventing a new number. */
+  --button-radius: calc(var(--radius-sm) * 4);
+
+  /* Header height — spec §5 Header D-004 */
+  --header-height-desktop: 88px;
+  --header-height-tablet: 80px;
+  --header-height-mobile: 72px;
+  --header-height: var(--header-height-mobile);
+
+  /* Content/grid measurements used across layout.css */
+  --content-max: var(--grid-max-width);
+  --content-margin: var(--grid-margin);
+  --reading-max: var(--reading-width-max);
+}
+
+@media (min-width: 768px) {
+  :root { --header-height: var(--header-height-tablet); }
+}
+
+@media (min-width: 1280px) {
+  :root { --header-height: var(--header-height-desktop); }
+}
