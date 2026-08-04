@@ -783,7 +783,19 @@ body.mobile-nav-open { overflow: hidden; }
 .quote-carousel__dot.is-active { background: var(--color-primary-brand); }
 
 @media (max-width: 767px) {
-  .quote-carousel { grid-template-columns: 36px 1fr 36px; gap: var(--space-sm); }
+  .quote-carousel { grid-template-columns: 36px 1fr 36px; gap: var(--space-xs); }
+  .quote-carousel__slide { font-size: clamp(1.25rem, 5vw, 1.75rem); }
+}
+
+/* ===================== About Adelier Section Heading ===================== */
+.about-heading {
+  font-family: var(--font-page-title);
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  margin: 0;
+  color: var(--color-primary-text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ===================== Image / text split section ===================== */
