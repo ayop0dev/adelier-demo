@@ -35,6 +35,11 @@
   --overlay-hero: rgba(253, 251, 247, 0.24);
   --overlay-modal-backdrop: rgba(0, 0, 0, 0.6);
   --overlay-lightbox: rgba(0, 0, 0, 0.96);
+  --overlay-gradient: linear-gradient(
+    to top, 
+    color-mix(in srgb, var(--color-secondary-brand) 75%, transparent) 0%, 
+    color-mix(in srgb, var(--color-background) 55%, transparent) 100%
+  );
 
   /* Typography — spec §4.3. Real font files loaded in base.css. */
   --font-page-title: "Alokary Personal Use", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
