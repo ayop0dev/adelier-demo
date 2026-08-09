@@ -72,6 +72,7 @@ body {
   line-height: var(--text-body-lh);
   font-weight: var(--font-weight-regular);
   overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -135,19 +136,17 @@ h4 {
   color: var(--color-background);
 }
 
-/* Styled scrollbar — V1 Decisions §6 "Scrollbar": palette colors, subtle, readable */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary-brand) var(--color-background);
+/* Hidden scrollbar — scrolling still works, just no visible track/thumb,
+   on desktop and mobile alike. */
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge/IE */
 }
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--color-background); }
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary-brand);
-  border: 3px solid var(--color-background);
-  border-radius: var(--radius-full);
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Chromium Edge */
 }
-::-webkit-scrollbar-thumb:hover { background: var(--color-primary-brand-hover); }
 
 [hidden] { display: none !important; }
 

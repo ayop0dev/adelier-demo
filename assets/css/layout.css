@@ -4,15 +4,23 @@
   section-gap scale (desktop 160 / tablet 120 / mobile 80).
 */
 
-/* Ensure zero horizontal scroll across all pages */
+/* Ensure zero horizontal scroll across all pages.
+   `main` is deliberately excluded: any non-visible overflow on an ancestor
+   breaks position:sticky for descendants (it becomes the sticky containing
+   block instead of the viewport), which the editorial slider relies on.
+   html/body already clip any horizontal overflow, so this is unaffected.
+   `clip` (not `hidden`) here: `hidden` forces the paired overflow-y to
+   compute as `auto`, which makes html/body a scroll container and breaks
+   position:sticky page-wide. `clip` avoids that axis-coupling. `hidden` is
+   kept first as a fallback for browsers without `clip` support. */
 html,
 body,
-main,
 .section,
 .site-footer,
 .site-header {
   max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img, picture, video, canvas {

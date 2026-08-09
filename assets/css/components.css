@@ -707,46 +707,69 @@ body.mobile-nav-open { overflow: hidden; }
 }
 
 /* ===================== Editorial Panoramic Slider ===================== */
+/* Pinned, scroll-driven horizontal showcase (see editorialSlider() in
+   site.js). The section's own height is set in JS to exactly the pixel
+   distance the track needs to travel — 1:1 with scroll, no dead runway.
+
+   The pin itself is driven by JS toggling position fixed/absolute (not
+   CSS position:sticky): native sticky only releases once the element has
+   fully scrolled through its own box height in normal flow afterwards,
+   which costs a full extra viewport-height of "dead" scroll with nothing
+   new happening. Manually switching to fixed exactly while progress is
+   between 0 and 1, and to absolute (pinned to the section's own top/bottom)
+   outside that range, means the section's height can equal the travel
+   distance exactly with zero release overhead. */
+
 .editorial-slider {
   position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-block: var(--space-xl) var(--space-lg);
 }
+
+.editorial-slider__sticky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .editorial-slider__sticky { height: 100vh; }
+}
+
+/* z-index only while actually pinned (fixed) — it needs to cover page
+   content scrolling behind it then. Outside that, it must stay in normal
+   stacking order or it paints over the next section as it scrolls away
+   (only elevate what's currently taking over the viewport). */
+.editorial-slider__sticky.is-pinned { position: fixed; top: 0; bottom: auto; z-index: 5; }
+.editorial-slider__sticky.is-past { position: absolute; top: auto; bottom: 0; }
 
 .editorial-slider__track {
   display: flex;
   gap: var(--space-md);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-inline: calc(50vw - 380px);
-}
-.editorial-slider__track::-webkit-scrollbar {
-  display: none;
+  padding-inline: var(--content-margin);
+  will-change: transform;
 }
 
 .editorial-slider__slide {
-  flex: 0 0 760px;
-  height: 500px;
-  scroll-snap-align: center;
+  flex: 0 0 min(760px, 82vw);
+  height: min(520px, 60vh);
   position: relative;
   cursor: pointer;
-  opacity: 0.45;
-  transform: scale(0.95);
-  transition: opacity var(--duration-base) var(--ease-standard), transform var(--duration-base) var(--ease-standard);
 }
 
-.editorial-slider__slide.is-active,
-.editorial-slider__slide:hover {
-  opacity: 1;
+.editorial-slider__slide::after { opacity: 1; transition: opacity var(--duration-base) var(--ease-standard); }
+
+@media (hover: hover) and (pointer: fine) {
+  .editorial-slider__slide:hover::after { opacity: 0; }
 }
 
-.editorial-slider__slide.is-active {
-  transform: scale(1);
-}
+.editorial-slider__slide.is-revealed::after { opacity: 0; }
 
 .editorial-slider__slide img {
   width: 100%;
@@ -756,6 +779,23 @@ body.mobile-nav-open { overflow: hidden; }
   border-radius: var(--radius-none);
   display: block;
 }
+
+.editorial-slider__dots { display: flex; justify-content: center; gap: var(--space-xs); }
+
+.editorial-slider__dot {
+  --dot-activeness: 0;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--color-border-default);
+  cursor: pointer;
+  opacity: calc(0.45 + (0.55 * var(--dot-activeness)));
+  transform: scale(calc(1 + (0.75 * var(--dot-activeness))));
+}
+
+.editorial-slider__dot.is-active { background: var(--color-primary-brand); }
 
 
 

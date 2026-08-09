@@ -124,24 +124,35 @@
 
     pairs.forEach(function (p) { p.link.addEventListener('click', function () { setActive(p); }); });
 
-    function updateVisibility() {
+    /* Scroll-position marker (not IntersectionObserver): a ratio-based
+       observer never reliably fires for a very tall pinned section (like the
+       editorial slider's scroll runway) — its intersectionRatio, measured
+       against its own huge area, stays under any reasonable threshold for
+       almost its entire scroll range. Checking which section's box currently
+       contains a fixed viewport marker works uniformly regardless of a
+       section's height. */
+    function update() {
       nav.classList.toggle('is-visible', window.scrollY > 300);
-    }
-    window.addEventListener('scroll', updateVisibility, { passive: true });
-    updateVisibility();
 
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        var visible = entries
-          .filter(function (e) { return e.isIntersecting; })
-          .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; })[0];
-        if (visible) {
-          var match = pairs.find(function (p) { return p.section === visible.target; });
-          if (match) setActive(match);
-        }
-      }, { rootMargin: '-20% 0px -55% 0px', threshold: [0.1, 0.3, 0.6] });
-      pairs.forEach(function (p) { io.observe(p.section); });
+      var markerY = window.innerHeight * 0.3;
+      var current = null;
+      pairs.forEach(function (p) {
+        var r = p.section.getBoundingClientRect();
+        if (r.top <= markerY && r.bottom > markerY) current = p;
+      });
+      if (current) setActive(current);
     }
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        update();
+        ticking = false;
+      });
+    }, { passive: true });
+    update();
   }
 
   /* Testimonials carousel — manual prev/next + dots, autoplay disabled (spec §5 Carousel, D-088). */
@@ -232,55 +243,164 @@
 
 
 
-  /* Editorial panoramic slider — magnetic scroll snap + active caption sync */
+  /* Editorial panoramic slider — pinned, scroll-driven horizontal showcase.
+     The section's own height equals exactly the pixel distance the track
+     needs to travel (1:1 with scroll — no dead runway either side). The pin
+     is driven manually (fixed while progress is 0–1, absolute to the
+     section's own top/bottom outside that) rather than via CSS
+     position:sticky, which would cost a full extra viewport-height of dead
+     scroll while it releases. */
   function editorialSlider() {
     var sliders = document.querySelectorAll('[data-editorial-slider]');
     if (!sliders.length) return;
 
-    sliders.forEach(function (slider) {
-      var track = slider.querySelector('[data-slider-track]');
-      var slides = Array.prototype.slice.call(slider.querySelectorAll('[data-slider-slide]'));
-      if (!track || !slides.length) return;
+    sliders.forEach(function (root) {
+      var sticky = root.querySelector('[data-slider-sticky]');
+      var track = root.querySelector('[data-slider-track]');
+      var slides = Array.prototype.slice.call(root.querySelectorAll('[data-slider-slide]'));
+      var dotsWrap = root.querySelector('[data-slider-dots]');
+      if (!sticky || !track || !slides.length) return;
 
-      function updateActive() {
-        var trackRect = track.getBoundingClientRect();
-        var trackCenter = trackRect.left + trackRect.width / 2;
-        var closestSlide = slides[0];
-        var minDistance = Infinity;
+      var dots = slides.map(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'editorial-slider__dot';
+        b.setAttribute('aria-label', 'Go to image ' + (i + 1) + ' of ' + slides.length);
+        if (dotsWrap) dotsWrap.appendChild(b);
+        return b;
+      });
 
-        slides.forEach(function (slide) {
-          var slideRect = slide.getBoundingClientRect();
-          var slideCenter = slideRect.left + slideRect.width / 2;
-          var dist = Math.abs(slideCenter - trackCenter);
-          if (dist < minDistance) {
-            minDistance = dist;
-            closestSlide = slide;
-          }
-        });
+      var status = document.createElement('span');
+      status.className = 'visually-hidden';
+      status.setAttribute('aria-live', 'polite');
+      root.appendChild(status);
 
-        slides.forEach(function (s) {
-          s.classList.toggle('is-active', s === closestSlide);
-        });
-      }
+      sticky.setAttribute('tabindex', '0');
+      sticky.setAttribute('role', 'group');
+      sticky.setAttribute('aria-roledescription', 'carousel');
+      sticky.setAttribute('aria-label', 'Visual showcase — use arrow keys to browse');
 
-      var ticking = false;
-      track.addEventListener('scroll', function () {
-        if (!ticking) {
-          window.requestAnimationFrame(function () {
-            updateActive();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-
-      slides.forEach(function (slide) {
-        slide.addEventListener('click', function () {
-          slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      /* Tap-to-reveal the overlay on touch devices (no hover state to rely
+         on) — CSS handles real mouse hover on its own. */
+      slides.forEach(function (s) {
+        s.addEventListener('click', function () {
+          s.classList.toggle('is-revealed');
         });
       });
 
-      updateActive();
+      var maxTravel = 0;
+      var runway = 0;
+      var lastAnnounced = -1;
+
+      function measure() {
+        maxTravel = Math.max(0, track.scrollWidth - sticky.clientWidth);
+        runway = maxTravel;
+        root.style.height = Math.max(runway, 1) + 'px';
+      }
+
+      function progress() {
+        if (runway <= 0) return 0;
+        var top = root.getBoundingClientRect().top;
+        return Math.min(1, Math.max(0, -top / runway));
+      }
+
+      function updatePinState() {
+        var rect = root.getBoundingClientRect();
+        if (rect.top > 0) {
+          sticky.classList.remove('is-pinned', 'is-past');
+        } else if (rect.bottom > 0) {
+          sticky.classList.add('is-pinned');
+          sticky.classList.remove('is-past');
+        } else {
+          sticky.classList.add('is-past');
+          sticky.classList.remove('is-pinned');
+        }
+      }
+
+      /* Fraction of progress, at each end, spent fading the whole pinned
+         scene in/out — softens the handoff into and out of the next
+         section instead of a hard cut the instant the pin releases. */
+      var FADE_ZONE = 0.08;
+
+      function apply(p) {
+        updatePinState();
+        track.style.transform = 'translate3d(' + (-p * maxTravel) + 'px,0,0)';
+
+        var fadeOut = p > 1 - FADE_ZONE ? Math.max(0, (1 - p) / FADE_ZONE) : 1;
+        var fadeIn = p < FADE_ZONE ? Math.max(0, p / FADE_ZONE) : 1;
+        sticky.style.opacity = Math.min(fadeOut, fadeIn);
+
+        var idxFloat = p * (slides.length - 1);
+        var nearest = Math.round(idxFloat);
+
+        slides.forEach(function (s, i) {
+          s.classList.toggle('is-active', i === nearest);
+        });
+
+        dots.forEach(function (d, i) {
+          var activeness = Math.max(0, 1 - Math.abs(idxFloat - i));
+          d.style.setProperty('--dot-activeness', activeness.toFixed(3));
+          d.classList.toggle('is-active', i === nearest);
+        });
+
+        if (nearest !== lastAnnounced) {
+          lastAnnounced = nearest;
+          status.textContent = 'Image ' + (nearest + 1) + ' of ' + slides.length;
+        }
+      }
+
+      function goToIndex(i) {
+        var target = Math.min(slides.length - 1, Math.max(0, i));
+        var p = slides.length > 1 ? target / (slides.length - 1) : 0;
+        var top = window.scrollY + root.getBoundingClientRect().top + p * runway;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          apply(progress());
+          ticking = false;
+        });
+      }
+
+      var resizeTimer;
+      function onResize() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          measure();
+          apply(progress());
+        }, 150);
+      }
+
+      dots.forEach(function (d, i) {
+        d.addEventListener('click', function () { goToIndex(i); });
+      });
+
+      sticky.addEventListener('keydown', function (e) {
+        var current = Math.round(progress() * (slides.length - 1));
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          goToIndex(current + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          goToIndex(current - 1);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          goToIndex(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          goToIndex(slides.length - 1);
+        }
+      });
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+
+      measure();
+      apply(progress());
     });
   }
 
