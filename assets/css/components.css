@@ -317,13 +317,7 @@ body.mobile-nav-open { overflow: hidden; }
   .hero { min-height: 70vh; padding-inline: 8vw; }
 }
 
-.hero--home { min-height: 100svh; }
-
-@media (min-width: 768px) {
-  .hero--home { min-height: 100vh; }
-}
-
-.hero:not(.hero--home) { align-items: flex-end; }
+.hero { align-items: flex-end; }
 
 .hero__image,
 .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; }
@@ -364,6 +358,124 @@ body.mobile-nav-open { overflow: hidden; }
 }
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
+
+/* ===================== Hero — Split (Home) ===================== */
+/* Two full-bleed panels showing halves of the same image, each cycling
+   independently through a shared image set (see heroSplit() in site.js). */
+
+.hero-split {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  background: #1a1a18;
+}
+
+@media (min-width: 768px) {
+  .hero-split { height: 100vh; }
+}
+
+.hero-split__panel {
+  position: relative;
+  flex: 1 1 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-split__panel-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.hero-split__panel--b .hero-split__panel-inner { transform: translateX(-50vw); }
+
+.hero-split__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 900ms var(--ease-standard), transform 900ms var(--ease-standard);
+}
+
+.hero-split__seam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hero-split__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(15, 14, 11, 0.62) 0%, rgba(15, 14, 11, 0.16) 32%, transparent 55%),
+    linear-gradient(to bottom, rgba(15, 14, 11, 0.32) 0%, transparent 22%);
+}
+
+.hero-split__scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-split__scroll-line {
+  width: 1px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-split__scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: hero-split-scroll-drip 2600ms ease-in-out infinite;
+}
+
+.hero-split__scroll-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #fff;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+@keyframes hero-split-scroll-drip {
+  0% { top: -100%; }
+  50% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@media (max-width: 768px) {
+  .hero-split { flex-direction: column; }
+  .hero-split__panel { flex: 1 1 50%; height: 50%; width: 100vw; }
+  .hero-split__panel-inner { height: 100vh; width: 100vw; }
+  .hero-split__panel--b .hero-split__panel-inner { transform: translateY(-50vh); }
+  .hero-split__seam { top: 50%; left: 0; width: 100%; height: 1px; }
+}
 
 /* ===================== Project card ===================== */
 

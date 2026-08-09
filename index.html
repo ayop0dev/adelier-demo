@@ -63,12 +63,29 @@
 
 <main id="main-content">
 
-  <section class="hero hero--home" id="home" aria-label="Introduction">
-    <video class="hero__video" autoplay loop muted playsinline preload="auto" poster="assets/images/home-hero.jpg" aria-hidden="true">
-      <source src="assets/video/hero.mp4" type="video/mp4">
-      <img class="hero__image" src="assets/images/home-hero.jpg" alt="Adelier interior — living space with natural light and warm materials" width="4998" height="2802">
-    </video>
-    <div class="hero__overlay"></div>
+  <section class="hero-split" id="home" aria-label="Adelier featured interiors">
+    <div class="hero-split__panel hero-split__panel--a">
+      <div class="hero-split__panel-inner">
+        <img class="hero-split__layer" src="assets/images/home-hero.jpg" alt="" style="object-position:center 42%;opacity:1;transform:scale(1);" width="4998" height="2802">
+        <img class="hero-split__layer" src="assets/images/home-about.jpg" alt="" style="object-position:center 55%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
+        <img class="hero-split__layer" src="assets/images/studio-gallery-1.jpg" alt="" style="object-position:center 45%;opacity:0;transform:scale(1.045);" width="3500" height="1969">
+        <img class="hero-split__layer" src="assets/images/studio-gallery-3.jpg" alt="" style="object-position:center 50%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
+      </div>
+    </div>
+    <div class="hero-split__panel hero-split__panel--b">
+      <div class="hero-split__panel-inner">
+        <img class="hero-split__layer" src="assets/images/home-hero.jpg" alt="" style="object-position:center 42%;opacity:1;transform:scale(1);" width="4998" height="2802">
+        <img class="hero-split__layer" src="assets/images/home-about.jpg" alt="" style="object-position:center 55%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
+        <img class="hero-split__layer" src="assets/images/studio-gallery-1.jpg" alt="" style="object-position:center 45%;opacity:0;transform:scale(1.045);" width="3500" height="1969">
+        <img class="hero-split__layer" src="assets/images/studio-gallery-3.jpg" alt="" style="object-position:center 50%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
+      </div>
+    </div>
+    <div class="hero-split__seam"></div>
+    <div class="hero-split__scrim"></div>
+    <div class="hero-split__scroll">
+      <span class="hero-split__scroll-line"></span>
+      <span class="hero-split__scroll-label">Scroll</span>
+    </div>
   </section>
 
   <section class="section" id="featured-projects">

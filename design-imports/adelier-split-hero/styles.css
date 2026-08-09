@@ -1,0 +1,130 @@
+/*
+  Adelier Split Hero — imported from claude.ai/design project
+  "Async split-screen hero" (Adelier Split Hero.dc.html) and reimplemented
+  as plain HTML/CSS/JS against this repo's existing design tokens
+  (assets/css/tokens.css), since the prototype has no build step / React.
+*/
+
+html, body {
+  margin: 0;
+  background: #000;
+}
+
+.adl-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  background: #1a1a18;
+}
+
+.adl-panel {
+  position: relative;
+  flex: 1 1 50%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.adl-panel-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.adl-panel-b .adl-panel-inner {
+  transform: translateX(-50vw);
+}
+
+.adl-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--adl-transition, 900ms) var(--ease-standard),
+              transform var(--adl-transition, 900ms) var(--ease-standard);
+}
+
+.adl-seam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.adl-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(15, 14, 11, 0.62) 0%, rgba(15, 14, 11, 0.16) 32%, transparent 55%),
+    linear-gradient(to bottom, rgba(15, 14, 11, 0.32) 0%, transparent 22%);
+}
+
+.adl-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.adl-scroll-line {
+  width: 1px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  position: relative;
+}
+
+.adl-scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: adl-scroll-drip 2600ms ease-in-out infinite;
+}
+
+.adl-scroll-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #fff;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+@keyframes adl-scroll-drip {
+  0% { top: -100%; }
+  50% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@media (max-width: 768px) {
+  .adl-hero { flex-direction: column; }
+  .adl-panel { flex: 1 1 50%; height: 50vh; width: 100vw; }
+  .adl-panel-inner { height: 100vh; width: 100vw; }
+  .adl-panel-b .adl-panel-inner { transform: translateY(-50vh); }
+  .adl-seam { top: 50%; left: 0; width: 100%; height: 1px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adl-layer { transition: opacity 350ms linear !important; }
+  .adl-scroll-line::after { animation: none; }
+}

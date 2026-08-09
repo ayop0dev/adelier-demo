@@ -284,6 +284,60 @@
     });
   }
 
+  /* Home hero — split-panel crossfade. Panels take turns advancing to the
+     next image, then the trailing panel catches up before the next turn. */
+  function heroSplit() {
+    var section = document.querySelector('.hero-split');
+    if (!section) return;
+
+    var leftLayers = Array.prototype.slice.call(section.querySelectorAll('.hero-split__panel--a .hero-split__layer'));
+    var rightLayers = Array.prototype.slice.call(section.querySelectorAll('.hero-split__panel--b .hero-split__layer'));
+    var count = leftLayers.length;
+    if (!count) return;
+
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var holdComplete = reducedMotion ? 4400 : 3400;
+    var holdHybrid = reducedMotion ? 3200 : 2600;
+    var state = { leftIdx: 0, rightIdx: 0, turn: 'left' };
+
+    function applyActive(layers, activeIdx) {
+      layers.forEach(function (img, i) {
+        var active = i === activeIdx;
+        img.style.opacity = active ? '1' : '0';
+        img.style.transform = active ? 'scale(1)' : 'scale(1.045)';
+      });
+    }
+
+    function render() {
+      applyActive(leftLayers, state.leftIdx);
+      applyActive(rightLayers, state.rightIdx);
+    }
+
+    function step() {
+      if (state.leftIdx === state.rightIdx) {
+        if (state.turn === 'left') {
+          state.leftIdx = (state.leftIdx + 1) % count;
+        } else {
+          state.rightIdx = (state.rightIdx + 1) % count;
+        }
+        render();
+        setTimeout(step, holdHybrid);
+      } else {
+        if (state.turn === 'left') {
+          state.rightIdx = state.leftIdx;
+          state.turn = 'right';
+        } else {
+          state.leftIdx = state.rightIdx;
+          state.turn = 'left';
+        }
+        render();
+        setTimeout(step, holdComplete);
+      }
+    }
+
+    setTimeout(step, holdComplete);
+  }
+
   header();
   menu();
   activeNav();
@@ -293,4 +347,5 @@
   forms();
   backToTop();
   editorialSlider();
+  heroSplit();
 }());
