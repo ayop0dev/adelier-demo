@@ -1,0 +1,72 @@
+/*
+  Adelier Dual Slider Hero — imported from claude.ai/design project
+  "Dual slider verification design" (Adelier Dual Slider Hero.dc.html) and
+  reimplemented as plain HTML/CSS/JS against this repo's existing pattern for
+  design imports (see ../adelier-split-hero), since the prototype has no
+  build step / React. Two independently-looping wipe sliders, divided by a
+  hairline, wipe left vertically and right horizontally by default.
+*/
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0a142f;
+}
+
+.dsh-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a142f;
+  font-family: 'Cairo', sans-serif;
+}
+
+.dsh-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.dsh-side {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: #0a142f;
+}
+
+.dsh-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: clip-path, transform, opacity;
+}
+
+.dsh-centerline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(241, 192, 118, 0.35);
+  z-index: 15;
+}
+
+@media (max-width: 860px) {
+  .dsh-row { flex-direction: column; }
+  .dsh-centerline {
+    top: 50%;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsh-layer { transition: opacity 900ms ease !important; }
+}
