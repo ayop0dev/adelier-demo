@@ -84,7 +84,7 @@
     <div class="hero-split__scrim"></div>
     <div class="hero-split__scroll">
       <span class="hero-split__scroll-line"></span>
-      <span class="hero-split__scroll-label">Scroll</span>
+      <span class="hero-split__scroll-label"></span>
     </div>
   </section>
 
@@ -122,30 +122,37 @@
   </section>
 
   <section class="section" id="about">
-    <div class="split" style="align-items: start; margin-bottom: var(--space-4xl);">
-      <div>
-        <h2 class="about-heading">
-          About adelier
-        </h2>
-      </div>
-      <div>
-        <p style="font-size: var(--text-body-size); line-height: 1.6; color: var(--color-primary-text); margin: 0;">
-          We create custom-designed spaces tailored to your needs and the unique characteristics of your environment. We select materials, fittings, and lighting so that every detail works for comfort and aesthetics. Well-thought-out designs for order, freedom, and beauty in your home.
-        </p>
-      </div>
+    <div style="margin-bottom: var(--space-4xl); max-width: 60%;">
+      <h2>
+        About adelier
+      </h2>
+      <p style="font-size: var(--text-body-size); line-height: 1.6; color: var(--color-primary-text); margin: var(--space-md) 0 0 0;">
+        We create custom-designed spaces tailored to your needs and the unique characteristics of your environment. We select materials, fittings, and lighting so that every detail works for comfort and aesthetics. Well-thought-out designs for order, freedom, and beauty in your home.
+      </p>
     </div>
 
     <div class="expanding-gallery">
-      <a href="pages/project-detail.html" class="expanding-gallery__item"><img src="assets/images/studio-gallery-4.jpg" alt="Gallery Detail 1"></a>
-      <a href="pages/project-detail.html" class="expanding-gallery__item"><img src="assets/images/studio-gallery-2.jpg" alt="Gallery Detail 2"></a>
-      <a href="pages/project-detail.html" class="expanding-gallery__item"><img src="assets/images/detail-gallery-2.jpg" alt="Gallery Detail 3"></a>
-      <a href="pages/project-detail.html" class="expanding-gallery__item"><img src="assets/images/studio-gallery-5.jpg" alt="Gallery Detail 4"></a>
-      <a href="pages/project-detail.html" class="expanding-gallery__item"><img src="assets/images/detail-gallery-4.jpg" alt="Gallery Detail 5"></a>
+      <div class="expanding-gallery__item">
+        <img src="assets/images/studio-gallery-4.jpg" alt="Gallery Detail 1">
+        <span class="gallery-label">Interior Architecture & Space Planning</span>
+      </div>
+      <div class="expanding-gallery__item">
+        <img src="assets/images/studio-gallery-2.jpg" alt="Gallery Detail 2">
+        <span class="gallery-label">Technical Design & Documentation</span>
+      </div>
+      <div class="expanding-gallery__item">
+        <img src="assets/images/detail-gallery-2.jpg" alt="Gallery Detail 3">
+        <span class="gallery-label">3D Visualization</span>
+      </div>
+      <div class="expanding-gallery__item">
+        <img src="assets/images/studio-gallery-5.jpg" alt="Gallery Detail 4">
+        <span class="gallery-label">Styling & Final Installation</span>
+      </div>
     </div>
   </section>
 
-  <section class="section section--tight" id="perspective">
-    <div class="quote-carousel" data-carousel>
+  <section class="section section--tight" id="perspective" data-carousel>
+    <div class="quote-carousel">
       <button class="quote-carousel__arrow" type="button" data-carousel-prev aria-label="Previous testimonial">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>

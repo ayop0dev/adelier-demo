@@ -99,13 +99,13 @@ h1 { font-size: var(--text-h1-size); line-height: var(--text-h1-lh); letter-spac
 h2 { font-size: var(--text-h2-size); line-height: var(--text-h2-lh); letter-spacing: var(--text-h2-ls); }
 h3 {
   font-family: var(--font-body);
-  font-size: var(--text-h3-size);
+  font-size: var(--text-h2-size);
   line-height: var(--text-h3-lh);
   font-weight: var(--text-h3-weight);
 }
 h4 {
   font-family: var(--font-body);
-  font-size: var(--text-h4-size);
+  font-size: var(--text-h2-size);
   line-height: var(--text-h4-lh);
   font-weight: var(--text-h4-weight);
 }
