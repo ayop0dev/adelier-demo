@@ -63,28 +63,24 @@
 
 <main id="main-content">
 
-  <section class="hero-split" id="home" aria-label="Adelier featured interiors">
-    <div class="hero-split__panel hero-split__panel--a">
-      <div class="hero-split__panel-inner">
-        <img class="hero-split__layer" src="assets/images/home-hero.jpg" alt="" style="object-position:center 42%;opacity:1;transform:scale(1);" width="4998" height="2802">
-        <img class="hero-split__layer" src="assets/images/home-about.jpg" alt="" style="object-position:center 55%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
-        <img class="hero-split__layer" src="assets/images/studio-gallery-1.jpg" alt="" style="object-position:center 45%;opacity:0;transform:scale(1.045);" width="3500" height="1969">
-        <img class="hero-split__layer" src="assets/images/studio-gallery-3.jpg" alt="" style="object-position:center 50%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
+  <section class="dsh-hero" id="home" aria-label="Adelier featured interiors">
+    <div class="dsh-row">
+      <div class="dsh-side dsh-side-left">
+        <img class="dsh-layer" data-side="left" data-index="0" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Sunlit living room with warm natural textures">
+        <img class="dsh-layer" data-side="left" data-index="1" src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80" alt="Minimal white residence exterior">
+        <img class="dsh-layer" data-side="left" data-index="2" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Warm wood-paneled interior corner">
+        <img class="dsh-layer" data-side="left" data-index="3" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80" alt="Soft daylight interior detail">
+      </div>
+      <div class="dsh-centerline"></div>
+      <div class="dsh-side dsh-side-right">
+        <img class="dsh-layer" data-side="right" data-index="0" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" alt="Moody dark dining space with a sculptural staircase">
+        <img class="dsh-layer" data-side="right" data-index="1" src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80" alt="Dark architectural corridor">
+        <img class="dsh-layer" data-side="right" data-index="2" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80" alt="Stone bathroom detail in shadow">
+        <img class="dsh-layer" data-side="right" data-index="3" src="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=1200&q=80" alt="Night facade of a modern building">
       </div>
     </div>
-    <div class="hero-split__panel hero-split__panel--b">
-      <div class="hero-split__panel-inner">
-        <img class="hero-split__layer" src="assets/images/home-hero.jpg" alt="" style="object-position:center 42%;opacity:1;transform:scale(1);" width="4998" height="2802">
-        <img class="hero-split__layer" src="assets/images/home-about.jpg" alt="" style="object-position:center 55%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
-        <img class="hero-split__layer" src="assets/images/studio-gallery-1.jpg" alt="" style="object-position:center 45%;opacity:0;transform:scale(1.045);" width="3500" height="1969">
-        <img class="hero-split__layer" src="assets/images/studio-gallery-3.jpg" alt="" style="object-position:center 50%;opacity:0;transform:scale(1.045);" width="3000" height="1688">
-      </div>
-    </div>
-    <div class="hero-split__seam"></div>
-    <div class="hero-split__scrim"></div>
-    <div class="hero-split__scroll">
-      <span class="hero-split__scroll-line"></span>
-      <span class="hero-split__scroll-label"></span>
+    <div class="dsh-scroll" aria-hidden="true">
+      <span class="dsh-scroll-line"></span>
     </div>
   </section>
 
@@ -121,8 +117,8 @@
     </div>
   </section>
 
-  <section class="section" id="about">
-    <div style="margin-bottom: var(--space-4xl); max-width: 60%;">
+  <section class="section" id="about" style="padding-top: 0;">
+    <div style="max-width: 60%;">
       <h2>
         About adelier
       </h2>
@@ -130,7 +126,9 @@
         We create custom-designed spaces tailored to your needs and the unique characteristics of your environment. We select materials, fittings, and lighting so that every detail works for comfort and aesthetics. Well-thought-out designs for order, freedom, and beauty in your home.
       </p>
     </div>
+  </section>
 
+  <section class="section" id="process" style="padding-top: 0;">
     <div class="expanding-gallery">
       <div class="expanding-gallery__item">
         <img src="assets/images/studio-gallery-4.jpg" alt="Gallery Detail 1">
@@ -151,7 +149,7 @@
     </div>
   </section>
 
-  <section class="section section--tight" id="perspective" data-carousel>
+  <section class="section" id="perspective" data-carousel style="padding-top: 0;">
     <div class="quote-carousel">
       <button class="quote-carousel__arrow" type="button" data-carousel-prev aria-label="Previous testimonial">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -222,10 +220,8 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="pages/projects.html">Projects</a></li>
-          <li><a href="pages/project-detail.html">Project Detail</a></li>
           <li><a href="pages/our-story.html">Our Story</a></li>
           <li><a href="pages/careers.html">Careers</a></li>
-          <li><a href="design-imports/second-home/index.html">Second Home</a></li>
         </ul>
       </nav>
       <div>
@@ -236,12 +232,21 @@
           <li>Dubai Design District, UAE</li>
         </ul>
       </div>
+      <div>
+        <h2>Social</h2>
+        <ul class="social-list">
+          <li><a href="https://facebook.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a></li>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg> Instagram</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7.2" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 16.5v-3.5a2 2 0 0 1 4 0v3.5"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg> LinkedIn</a></li>
+        </ul>
+      </div>
     </div>
     <div class="site-footer__legal">
       <span>© Adelier. All Rights Reserved.</span>
       <nav aria-label="Legal">
         <a href="#" aria-disabled="true">Privacy Policy</a>
         <a href="#" aria-disabled="true">Terms &amp; Conditions</a>
+        <a href="pages/contact.html">Contacts</a>
       </nav>
     </div>
   </div>

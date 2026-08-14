@@ -131,8 +131,13 @@
        almost its entire scroll range. Checking which section's box currently
        contains a fixed viewport marker works uniformly regardless of a
        section's height. */
+    var footer = document.querySelector('.site-footer');
     function update() {
-      nav.classList.toggle('is-visible', window.scrollY > 300);
+      var footerVisible = false;
+      if (footer) {
+        footerVisible = footer.getBoundingClientRect().top < window.innerHeight;
+      }
+      nav.classList.toggle('is-visible', window.scrollY > 300 && !footerVisible);
 
       var markerY = window.innerHeight * 0.3;
       var current = null;
@@ -241,58 +246,138 @@
     });
   }
 
-  /* Home hero — split-panel crossfade. Panels take turns advancing to the
-     next image, then the trailing panel catches up before the next turn. */
-  function heroSplit() {
-    var section = document.querySelector('.hero-split');
+  /* Home hero — Dual Slider */
+  function dualSliderHero() {
+    var section = document.querySelector('.dsh-hero');
     if (!section) return;
 
-    var leftLayers = Array.prototype.slice.call(section.querySelectorAll('.hero-split__panel--a .hero-split__layer'));
-    var rightLayers = Array.prototype.slice.call(section.querySelectorAll('.hero-split__panel--b .hero-split__layer'));
-    var count = leftLayers.length;
-    if (!count) return;
+    var TRANSITION_SPEED = 1100;
+    var WIPE_SAME = false;
 
-    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var holdComplete = reducedMotion ? 4400 : 3400;
-    var holdHybrid = reducedMotion ? 3200 : 2600;
-    var state = { leftIdx: 0, rightIdx: 0, turn: 'left' };
+    var LEFT_POS = [
+      { desktop: 'center 40%', mobile: 'center 30%' },
+      { desktop: 'center 55%', mobile: 'center 45%' },
+      { desktop: 'center 35%', mobile: 'center 40%' },
+      { desktop: 'center 45%', mobile: 'center 35%' }
+    ];
+    var RIGHT_POS = [
+      { desktop: 'center 45%', mobile: 'center 40%' },
+      { desktop: 'center 50%', mobile: 'center 45%' },
+      { desktop: 'center 40%', mobile: 'center 35%' },
+      { desktop: 'center 55%', mobile: 'center 50%' }
+    ];
 
-    function applyActive(layers, activeIdx) {
-      layers.forEach(function (img, i) {
-        var active = i === activeIdx;
-        img.style.opacity = active ? '1' : '0';
-        img.style.transform = active ? 'scale(1)' : 'scale(1.045)';
+    var mqMobile = window.matchMedia('(max-width: 860px)');
+    var mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    var sides = ['left', 'right'].map(function (name) {
+      return {
+        name: name,
+        positions: name === 'left' ? LEFT_POS : RIGHT_POS,
+        layers: Array.prototype.slice.call(document.querySelectorAll('.dsh-layer[data-side="' + name + '"]')),
+        active: 0,
+        timer: null
+      };
+    });
+
+    function applyPositions() {
+      var isMobile = mqMobile.matches;
+      sides.forEach(function (side) {
+        side.layers.forEach(function (layer, i) {
+          layer.style.objectPosition = isMobile ? side.positions[i].mobile : side.positions[i].desktop;
+        });
       });
     }
 
-    function render() {
-      applyActive(leftLayers, state.leftIdx);
-      applyActive(rightLayers, state.rightIdx);
+    function resetLayerStyles(side) {
+      side.layers.forEach(function (layer, i) {
+        var isActive = i === side.active;
+        layer.style.transition = 'none';
+        layer.style.clipPath = 'inset(0px)';
+        layer.style.transform = 'translateY(0%)';
+        layer.style.opacity = isActive ? '1' : '0';
+        layer.style.zIndex = isActive ? '2' : '1';
+      });
     }
 
-    function step() {
-      if (state.leftIdx === state.rightIdx) {
-        if (state.turn === 'left') {
-          state.leftIdx = (state.leftIdx + 1) % count;
-        } else {
-          state.rightIdx = (state.rightIdx + 1) % count;
-        }
-        render();
-        setTimeout(step, holdHybrid);
-      } else {
-        if (state.turn === 'left') {
-          state.rightIdx = state.leftIdx;
-          state.turn = 'right';
-        } else {
-          state.leftIdx = state.rightIdx;
-          state.turn = 'left';
-        }
-        render();
-        setTimeout(step, holdComplete);
-      }
+    function crossfadeStep(side) {
+      var next = (side.active + 1) % side.layers.length;
+      side.layers.forEach(function (layer, i) {
+        layer.style.transition = 'opacity 900ms ease';
+        layer.style.opacity = i === next ? '1' : '0';
+        layer.style.zIndex = i === next ? '2' : '1';
+        layer.style.transform = 'translateY(0%)';
+      });
+      side.active = next;
+      side.timer = setTimeout(function () { crossfadeStep(side); }, 3800 + Math.random() * 800);
     }
 
-    setTimeout(step, holdComplete);
+    function slideStep(side) {
+      var count = side.layers.length;
+      var current = side.active;
+      var next = (current + 1) % count;
+      var outgoing = side.layers[current];
+      var incoming = side.layers[next];
+      
+      var outTranslateY = side.name === 'left' ? '100%' : '-100%';
+      var inTranslateY  = side.name === 'left' ? '-100%' : '100%';
+
+      incoming.style.transition = 'none';
+      incoming.style.clipPath = 'inset(0px)';
+      incoming.style.transform = 'translateY(' + inTranslateY + ')';
+      incoming.style.zIndex = '3';
+      incoming.style.opacity = '1';
+      
+      outgoing.style.transition = 'none';
+      outgoing.style.transform = 'translateY(0%)';
+      outgoing.style.zIndex = '2';
+      outgoing.style.opacity = '1';
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var trans = 'transform ' + TRANSITION_SPEED + 'ms cubic-bezier(.65,0,.35,1)';
+          incoming.style.transition = trans;
+          outgoing.style.transition = trans;
+          
+          incoming.style.transform = 'translateY(0%)';
+          outgoing.style.transform = 'translateY(' + outTranslateY + ')';
+        });
+      });
+
+      side.timer = setTimeout(function () {
+        outgoing.style.zIndex = '1';
+        outgoing.style.opacity = '0';
+        incoming.style.zIndex = '2';
+        side.active = next;
+        var base = side.name === 'left' ? 5200 : 4400;
+        side.timer = setTimeout(function () { slideStep(side); }, base + Math.random() * 900);
+      }, TRANSITION_SPEED + 40);
+    }
+
+    function start() {
+      sides.forEach(function (side) { clearTimeout(side.timer); });
+
+      var reduced = mqReduced.matches;
+      sides.forEach(resetLayerStyles);
+      applyPositions();
+
+      var stepFn = reduced ? crossfadeStep : slideStep;
+      var leftDelay = reduced ? 4200 : 2600;
+      var rightDelay = reduced ? 3400 : 1400;
+      sides.forEach(function (side) {
+        var delay = side.name === 'left' ? leftDelay : rightDelay;
+        side.timer = setTimeout(function () { stepFn(side); }, delay);
+      });
+    }
+
+    mqMobile.addEventListener('change', applyPositions);
+    mqReduced.addEventListener('change', start);
+
+    start();
+
+    window.addEventListener('beforeunload', function () {
+      sides.forEach(function (side) { clearTimeout(side.timer); });
+    });
   }
 
   header();
@@ -302,5 +387,5 @@
   carousel();
   jobModal();
   backToTop();
-  heroSplit();
+  dualSliderHero();
 }());
