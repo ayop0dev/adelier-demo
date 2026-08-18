@@ -8,3 +8,22 @@
 
 /* Project Details — metadata block needs extra clearance from the gallery above it. */
 [data-page="project-detail"] .metadata { margin-top: var(--space-2xl); }
+
+/* Home — About section */
+[data-page="home"] #about .about-content {
+  max-width: 60%;
+  margin-inline: auto;
+  text-align: center;
+}
+[data-page="home"] #about .about-content p {
+  font-size: var(--text-body-size);
+  line-height: 1.6;
+  color: var(--color-primary-text);
+  margin-top: var(--space-md);
+}
+
+@media (max-width: 767px) {
+  [data-page="home"] #about .about-content {
+    max-width: 100%;
+  }
+}
