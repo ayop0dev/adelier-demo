@@ -43,9 +43,7 @@ img, picture, video, canvas {
   padding-inline: var(--content-margin);
 }
 
-.section + .section {
-  padding-block-start: var(--space-3xl);
-}
+/* section adjacent spacing removed to allow full gaps */
 
 .section--tight {
   padding-block: 80px;
