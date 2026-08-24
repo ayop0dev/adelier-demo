@@ -309,7 +309,7 @@
         layer.style.transform = 'translateY(0%)';
       });
       side.active = next;
-      side.timer = setTimeout(function () { crossfadeStep(side); }, 3800 + Math.random() * 800);
+      side.timer = setTimeout(function () { crossfadeStep(side); }, 4000);
     }
 
     function slideStep(side) {
@@ -349,8 +349,7 @@
         outgoing.style.opacity = '0';
         incoming.style.zIndex = '2';
         side.active = next;
-        var base = side.name === 'left' ? 5200 : 4400;
-        side.timer = setTimeout(function () { slideStep(side); }, base + Math.random() * 900);
+        side.timer = setTimeout(function () { slideStep(side); }, 5000);
       }, TRANSITION_SPEED + 40);
     }
 
@@ -362,11 +361,9 @@
       applyPositions();
 
       var stepFn = reduced ? crossfadeStep : slideStep;
-      var leftDelay = reduced ? 4200 : 2600;
-      var rightDelay = reduced ? 3400 : 1400;
+      var initialDelay = reduced ? 4000 : 2600;
       sides.forEach(function (side) {
-        var delay = side.name === 'left' ? leftDelay : rightDelay;
-        side.timer = setTimeout(function () { stepFn(side); }, delay);
+        side.timer = setTimeout(function () { stepFn(side); }, initialDelay);
       });
     }
 

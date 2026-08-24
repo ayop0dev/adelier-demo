@@ -48,6 +48,13 @@
   gap: var(--space-md);
 }
 
+/* Override .container bounds so the header perfectly aligns with full-width sections (like Featured Projects) */
+.site-header__inner.container {
+  max-width: 100%;
+  width: 100%;
+  padding-inline: var(--content-margin);
+}
+
 .site-header__logo-link { display: inline-flex; align-items: center; color: inherit; }
 
 .logo-mark { display: inline-block; width: 132px; height: auto; flex-shrink: 0; transition: filter var(--duration-fast) var(--ease-standard), opacity var(--duration-fast) var(--ease-standard); }
@@ -382,7 +389,7 @@ body.mobile-nav-open { overflow: hidden; }
   position: relative;
   flex: 1;
   overflow: hidden;
-  background: #0a142f;
+  background: var(--color-primary-text);
 }
 
 .dsh-layer {
@@ -571,6 +578,19 @@ body.mobile-nav-open { overflow: hidden; }
   .project-grid .project-card {
     margin-bottom: 12px;
   }
+  
+  /* 
+    Calculate aspect ratios for mobile (2 columns) to ensure flush bottoms
+    Col 1 (Items 1, 2, 3): 1.25 + 1.0 + 1.25 = 3.5
+    Col 2 (Items 4, 5, 6): 1.0 + 1.5 + 1.0 = 3.5
+  */
+  .project-grid .project-card:nth-child(1) { aspect-ratio: 4 / 5; }
+  .project-grid .project-card:nth-child(2) { aspect-ratio: 1 / 1; }
+  .project-grid .project-card:nth-child(3) { aspect-ratio: 4 / 5; }
+  .project-grid .project-card:nth-child(4) { aspect-ratio: 1 / 1; }
+  .project-grid .project-card:nth-child(5) { aspect-ratio: 2 / 3; }
+  .project-grid .project-card:nth-child(6) { aspect-ratio: 1 / 1; }
+
   .project-grid .project-card__content {
     inset: auto 10px 10px;
     gap: 4px;
@@ -997,6 +1017,12 @@ body.mobile-nav-open { overflow: hidden; }
   background: var(--color-background);
   color: var(--color-primary-text);
   border-top: 1px solid var(--color-border-divider);
+}
+
+/* Override .container bounds so the footer perfectly aligns with full-width sections */
+.site-footer .container {
+  max-width: 100%;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
