@@ -294,7 +294,7 @@
         var isActive = i === side.active;
         layer.style.transition = 'none';
         layer.style.clipPath = 'inset(0px)';
-        layer.style.transform = 'translateY(0%)';
+        layer.style.transform = 'translate(0%, 0%)';
         layer.style.opacity = isActive ? '1' : '0';
         layer.style.zIndex = isActive ? '2' : '1';
       });
@@ -306,7 +306,7 @@
         layer.style.transition = 'opacity 900ms ease';
         layer.style.opacity = i === next ? '1' : '0';
         layer.style.zIndex = i === next ? '2' : '1';
-        layer.style.transform = 'translateY(0%)';
+        layer.style.transform = 'translate(0%, 0%)';
       });
       side.active = next;
       side.timer = setTimeout(function () { crossfadeStep(side); }, 4000);
@@ -319,17 +319,20 @@
       var outgoing = side.layers[current];
       var incoming = side.layers[next];
       
-      var outTranslateY = side.name === 'left' ? '100%' : '-100%';
-      var inTranslateY  = side.name === 'left' ? '-100%' : '100%';
+      var isMobile = mqMobile.matches;
+      var transformProperty = isMobile ? 'translateX' : 'translateY';
+      
+      var outTranslate = side.name === 'left' ? '100%' : '-100%';
+      var inTranslate  = side.name === 'left' ? '-100%' : '100%';
 
       incoming.style.transition = 'none';
       incoming.style.clipPath = 'inset(0px)';
-      incoming.style.transform = 'translateY(' + inTranslateY + ')';
+      incoming.style.transform = transformProperty + '(' + inTranslate + ')';
       incoming.style.zIndex = '3';
       incoming.style.opacity = '1';
       
       outgoing.style.transition = 'none';
-      outgoing.style.transform = 'translateY(0%)';
+      outgoing.style.transform = transformProperty + '(0%)';
       outgoing.style.zIndex = '2';
       outgoing.style.opacity = '1';
 
@@ -339,8 +342,8 @@
           incoming.style.transition = trans;
           outgoing.style.transition = trans;
           
-          incoming.style.transform = 'translateY(0%)';
-          outgoing.style.transform = 'translateY(' + outTranslateY + ')';
+          incoming.style.transform = transformProperty + '(0%)';
+          outgoing.style.transform = transformProperty + '(' + outTranslate + ')';
         });
       });
 

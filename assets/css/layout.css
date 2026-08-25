@@ -139,6 +139,7 @@ img, picture, video, canvas {
   .section--tight { padding-block: var(--space-4xl); }
   .section__heading { display: block; margin-bottom: var(--space-lg); }
   .section__heading .button { margin-top: var(--space-md); }
+  .section__heading .button--text { display: none; }
   .grid--3, .grid--4 { grid-template-columns: 1fr; }
   .grid { gap: var(--space-md); }
 }
