@@ -94,16 +94,6 @@
 
 .site-header__actions { display: flex; align-items: center; gap: var(--space-md); }
 
-.site-header__social { display: none; align-items: center; gap: var(--space-sm); }
-
-@media (min-width: 1280px) {
-  .site-header__social { display: flex; }
-}
-
-.site-header__social a { display: inline-flex; color: currentColor; opacity: 0.85; transition: opacity var(--duration-fast) var(--ease-standard); }
-.site-header__social a:hover { opacity: 1; }
-.site-header__social svg { width: 20px; height: 20px; }
-
 a.button.site-header__cta {
   display: inline-flex;
   align-items: center;
@@ -375,7 +365,6 @@ body.mobile-nav-open { overflow: hidden; }
   overflow: hidden;
   background: var(--color-primary-text); /* Grey brand color */
   display: flex;
-  font-family: 'Cairo', sans-serif;
 }
 
 .dsh-row {
@@ -549,16 +538,6 @@ body.mobile-nav-open { overflow: hidden; }
 .project-grid .project-card:nth-child(5) { aspect-ratio: 3 / 2; } /* Landscape */
 .project-grid .project-card:nth-child(6) { aspect-ratio: 3 / 5; } /* Extra Tall */
 
-.projects-page-grid .project-card:nth-child(1) { aspect-ratio: 4 / 5; }
-.projects-page-grid .project-card:nth-child(2) { aspect-ratio: 1 / 1; }
-.projects-page-grid .project-card:nth-child(3) { aspect-ratio: 4 / 3; }
-.projects-page-grid .project-card:nth-child(4) { aspect-ratio: 4 / 3; }
-.projects-page-grid .project-card:nth-child(5) { aspect-ratio: 4 / 5; }
-.projects-page-grid .project-card:nth-child(6) { aspect-ratio: 1 / 1; }
-.projects-page-grid .project-card:nth-child(7) { aspect-ratio: 1 / 1; }
-.projects-page-grid .project-card:nth-child(8) { aspect-ratio: 4 / 3; }
-.projects-page-grid .project-card:nth-child(9) { aspect-ratio: 4 / 5; }
-
 .project-grid .project-card img {
   height: 100%;
   display: block;
@@ -601,204 +580,6 @@ body.mobile-nav-open { overflow: hidden; }
   .project-grid .project-card__meta {
     font-size: var(--text-caption-size);
   }
-}
-
-/* Editorial irregular archive layout (V1 Decisions §"Projects Archive Editorial Composition") —
-   each row is its own grid so staggered offsets can never overlap the row below it. */
-.editorial-grid { display: flex; flex-direction: column; gap: var(--space-2xl); }
-.editorial-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-2xl); align-items: start; }
-.editorial-row .project-card.is-offset { margin-top: var(--space-4xl); }
-
-.span-4 { grid-column: span 4; }
-.span-5 { grid-column: span 5; }
-.span-6 { grid-column: span 6; }
-.span-7 { grid-column: span 7; }
-
-@media (max-width: 1279px) {
-  .editorial-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
-  .editorial-row .span-4,
-  .editorial-row .span-5,
-  .editorial-row .span-6,
-  .editorial-row .span-7 { grid-column: span 1; }
-  .editorial-row .span-12 { grid-column: span 2; }
-  .editorial-row .project-card.is-offset,
-  .editorial-row .is-offset { margin-top: var(--space-xl); }
-}
-
-@media (max-width: 767px) {
-  .editorial-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .editorial-row .span-4,
-  .editorial-row .span-5,
-  .editorial-row .span-6,
-  .editorial-row .span-7 { grid-column: span 1; }
-  .editorial-row .span-12 { grid-column: span 2; }
-  .editorial-row .project-card.is-offset,
-  .editorial-row .is-offset { margin-top: 24px; }
-}
-
-/* Tight editorial grid for project details gallery (Masonry Layout with 16px gap) */
-.editorial-grid--tight {
-  display: block;
-  columns: 1;
-  column-gap: 16px;
-}
-@media (min-width: 768px) {
-  .editorial-grid--tight {
-    columns: 2;
-  }
-}
-@media (min-width: 1280px) {
-  .editorial-grid--tight {
-    columns: 3;
-  }
-}
-.editorial-grid--tight .project-card {
-  break-inside: avoid;
-  margin-bottom: 16px;
-  aspect-ratio: auto;
-}
-
-/* ===================== Editorial image gallery ===================== */
-
-.editorial-gallery { columns: 2; column-gap: 12px; }
-
-@media (min-width: 768px) {
-  .editorial-gallery { columns: 2; column-gap: var(--space-lg); }
-}
-
-@media (min-width: 1280px) {
-  .editorial-gallery { column-gap: var(--space-xl); }
-}
-
-.editorial-gallery img {
-  width: 100%;
-  margin-bottom: 12px;
-  break-inside: avoid;
-  border-radius: var(--radius-md);
-}
-
-@media (min-width: 768px) {
-  .editorial-gallery img { margin-bottom: var(--space-lg); }
-}
-
-@media (min-width: 1280px) {
-  .editorial-gallery img { margin-bottom: var(--space-xl); }
-}
-
-/* Simple two-up gallery (Project Details, Our Story) */
-.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md); }
-.gallery img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-md); }
-
-@media (max-width: 767px) {
-  .gallery { grid-template-columns: 1fr; }
-}
-
-/* ===================== Editorial Panoramic Slider ===================== */
-/* Pinned, scroll-driven horizontal showcase (see editorialSlider() in
-   site.js). The section's own height is set in JS to exactly the pixel
-   distance the track needs to travel — 1:1 with scroll, no dead runway.
-
-   The pin itself is driven by JS toggling position fixed/absolute (not
-   CSS position:sticky): native sticky only releases once the element has
-   fully scrolled through its own box height in normal flow afterwards,
-   which costs a full extra viewport-height of "dead" scroll with nothing
-   new happening. Manually switching to fixed exactly while progress is
-   between 0 and 1, and to absolute (pinned to the section's own top/bottom)
-   outside that range, means the section's height can equal the travel
-   distance exactly with zero release overhead. */
-
-.editorial-slider {
-  position: relative;
-  overflow: hidden;
-  padding-block: var(--space-2xl);
-}
-
-.editorial-slider__sticky {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - var(--space-md) / 2)); }
-}
-
-.editorial-slider__track {
-  display: flex;
-  gap: var(--space-md);
-  width: max-content;
-  will-change: transform;
-  animation: marquee 30s linear infinite;
-}
-
-.editorial-slider__track:hover {
-  animation-play-state: paused;
-}
-
-.editorial-slider__slide {
-  flex: 0 0 min(760px, 82vw);
-  height: min(520px, 60vh);
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.editorial-slider__slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: var(--radius-md);
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-.editorial-slider__slide:hover img {
-  transform: scale(1.05);
-}
-
-
-
-/* ===================== Project Information Grid (Half Image / Half Info) ===================== */
-.project-info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-xl);
-  align-items: start;
-}
-
-@media (min-width: 768px) {
-  .project-info-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2xl);
-  }
-}
-
-@media (min-width: 1280px) {
-  .project-info-grid {
-    gap: var(--space-3xl);
-  }
-}
-
-.project-info-grid__media img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  display: block;
-}
-
-.project-info-grid__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.project-info-grid__content dl.metadata {
-  margin-top: var(--space-md);
-  gap: var(--space-md);
 }
 
 /* ===================== Project Information Vertical ===================== */
@@ -924,19 +705,6 @@ body.mobile-nav-open { overflow: hidden; }
 }
 
 
-
-/* ===================== Image / text split section ===================== */
-
-.split { display: grid; grid-template-columns: 1fr; gap: var(--space-2xl); align-items: center; }
-
-@media (min-width: 1280px) {
-  .split { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4xl); }
-  .split--reverse { direction: rtl; }
-  .split--reverse > * { direction: ltr; }
-}
-
-.split__media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-md); }
-.split__content { max-width: 720px; }
 
 /* ===================== CTA section ===================== */
 
@@ -1288,9 +1056,7 @@ body.mobile-nav-open { overflow: hidden; }
 .back-to-top:hover { border-color: var(--color-primary-text); color: var(--color-primary-text-active); }
 .back-to-top svg { width: 20px; height: 20px; }
 
-/* ===================== Breadcrumb-adjacent measure & metadata ===================== */
-
-.measure { max-width: var(--reading-max); }
+/* ===================== Project metadata ===================== */
 
 .metadata { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-border-divider); }
 .metadata dt { font-size: var(--text-caption-size); letter-spacing: var(--text-caption-ls); text-transform: uppercase; color: var(--color-primary-text); opacity: 0.7; }
@@ -1298,65 +1064,6 @@ body.mobile-nav-open { overflow: hidden; }
 
 @media (max-width: 767px) {
   .metadata { grid-template-columns: repeat(2, 1fr); }
-}
-
-
-
-/* ===================== Team ===================== */
-.team-grid {
-  gap: var(--space-4xl) var(--space-3xl);
-  max-width: 1080px;
-  margin-inline: auto;
-}
-
-@media (min-width: 1024px) {
-  .team-grid {
-    gap: 120px 80px; /* Generous spacing matching the screenshot */
-  }
-}
-
-.team-member {
-  text-align: center;
-  cursor: pointer;
-}
-
-.team-member__image-wrap {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  margin-bottom: var(--space-md);
-  position: relative;
-}
-
-.team__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s var(--ease-standard), filter 0.8s var(--ease-standard);
-  filter: grayscale(100%);
-}
-
-.team-member:hover .team__image {
-  transform: scale(1.08);
-  filter: grayscale(0%);
-}
-
-.team-member h3 {
-  font-family: var(--font-page-title);
-  font-size: var(--text-h4-size);
-  color: var(--color-primary-text);
-  margin-bottom: var(--space-xxs);
-  transition: color var(--duration-base) var(--ease-standard);
-}
-
-.team-member p {
-  color: var(--color-secondary-text);
-  font-size: var(--text-body-sm-size);
-}
-
-.team-member:hover h3 {
-  color: var(--color-primary-brand);
 }
 
 /* ===================== Gallery Masonry ===================== */

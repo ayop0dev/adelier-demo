@@ -154,11 +154,8 @@
     that authorizes it (docs/03-execution/05-PROTOTYPE-V1-DECISIONS.md).
   */
 
-  /* Curved-button radius — derived from --radius-sm per V1 Decisions §"Curved Button Radius":
-     more curved than radius-sm, restrained (not a pill). radius-sm(2px) * 4 = 8px, equal to the
-     existing radius-lg step — reuses a value already in the closed radius system rather than
-     inventing a new number. */
-  --button-radius: calc(var(--radius-sm) * 4);
+  /* Button radius — aligned with approved pill-shaped button implementation (999px) */
+  --button-radius: 999px;
 
   /* Header height — spec §5 Header D-004 */
   --header-height-desktop: 88px;

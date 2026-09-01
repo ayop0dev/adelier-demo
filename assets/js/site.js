@@ -386,6 +386,7 @@
   sectionNav();
   carousel();
   jobModal();
+  forms();
   backToTop();
   dualSliderHero();
 }());
